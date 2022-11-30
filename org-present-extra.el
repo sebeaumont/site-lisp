@@ -3,15 +3,28 @@
 ;;;  Lots of font and variable hacking that can be toggled
 
 ;;; Code:
-;; add this in whatever package hooks (with-eval-after-load "org-tree-slide"
-;;  (add-hook 'org-tree-slide-play-hook 'my-toggle-org-meta-line)
- ;; (add-hook 'org-tree-slide-stop-hook 'my-toggle-org-meta-line))
+
 (require 'org)
 (require 'org-faces)
 
 (defcustom org-present-extra-default
-  '(default :height 1.5)
-  "Default."
+  '(default :height 2.0)
+  "Default face re-mapping."
+  :group 'org-present-extra)
+
+(defcustom org-present-extra-header
+  '(header-line :height 1.5)
+  "Header line face re-mapping."
+  :group 'org-present-extra)
+
+(defcustom org-present-extra-document-title
+  '(org-document-title :height 1.5)
+  "Document title face re-mapping."
+  :group 'org-present-extra)
+
+(defcustom org-present-extra-code
+  '(org-code :height 2.0)
+  "Code block face re-mapping."
   :group 'org-present-extra)
 
 ;;;###autoload
@@ -20,8 +33,8 @@
   (interactive)
   (set-variable 'org-hide-emphasis-markers t)
   (xtra/hide-org-block-markers)
-  (xtra/resize-org-faces)
-  (org-mode-restart))
+  (xtra/remap-org-faces)
+  )
 
 ;;;###autoload
 (defun org-present-extra-end ()
@@ -32,6 +45,17 @@
   (xtra/reset-org-faces)
   (org-mode-restart))
 
+;;;###autoload
+(defun org-present-hide-emphasis-markers (arg)
+  "Hide or show the stuff depending on ARG."
+  (interactive "P")
+  ;; without a prefix hide the things
+  (set-variable 'org-hide-emphasis-markers
+                (if (null arg) t nil))
+   ;; yes really!
+  (org-mode-restart))
+  
+     
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun xtra/hide-org-block-markers ()
@@ -54,10 +78,8 @@
   (set-face-attribute
    'org-block-end-line nil :foreground nil :background nil))
 
-;;; turn and face the change...
 
-
-(defvar-local xtra-default-cookie nil)
+(defvar-local xtra-org-default-cookie nil)
 (defvar-local xtra-header-cookie nil)
 (defvar-local xtra-org-document-title-cookie nil)
 (defvar-local xtra-org-code-cookie nil)
@@ -65,17 +87,22 @@
 (defvar-local xtra-org-block-cookie nil)
 (defvar-local xtra-org-block-begin-line-cookie nil)
 
-(defun xtra/resize-org-faces ()
-  "Tweak org mode faces - YMMV."
+(defun xtra/remap-org-faces ()
+  "Remap org mode faces from customised values."
   (setq-local
-   xtra-default-cookie
-   (face-remap-add-relative 'default org-present-extra-default)))
+   xtra-org-default-cookie
+   (face-remap-add-relative 'default org-present-extra-default)
+   xtra-header-cookie
+   (face-remap-add-relative 'header-line org-present-extra-header)
+   xtra-org-document-title-cookie
+   (face-remap-add-relative 'org-document-title org-present-extra-document-title)
+   ))
 
 (defun xtra/reset-org-faces ()
   "Reset org mode faces."
-  (face-remap-remove-relative xtra-default-cookie))
-
-
+  (face-remap-remove-relative xtra-org-default-cookie)
+  (face-remap-remove-relative xtra-header-cookie)
+  (face-remap-remove-relative xtra-org-document-title-cookie))
 
 ;   '((default (:height 1.5) default)
 ;     (header-line (:height 5.0) header-line)
