@@ -8,7 +8,7 @@
 (require 'org-faces)
 
 (defcustom org-present-extra-default
-  '(:height 1.5)
+  '(:height 2.0)
   "Default face re-mapping."
   :group 'org-present-extra)
 
@@ -25,6 +25,21 @@
 (defcustom org-present-extra-code
   '(:height 2.0)
   "Code block face re-mapping."
+  :group 'org-present-extra)
+
+(defcustom org-present-extra-verbatim
+  '(:height 1.5)
+  "Verbatim block face remapping."
+  :group 'org-present-extra)
+
+(defcustom org-present-extra-block
+  '(:height 1.25)
+  "Block face remapping."
+  :group 'org-present-extra)
+
+(defcustom org-present-extra-block-begin-line
+  '(:height 0.5)
+  "Block begin line face remapping."
   :group 'org-present-extra)
 
 ;;;###autoload
@@ -54,7 +69,6 @@
    ;; yes really!
   (org-mode-restart))
   
-     
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun xtra/hide-org-block-markers ()
@@ -85,44 +99,45 @@
 (defvar-local xtra-org-block-cookie nil)
 (defvar-local xtra-org-block-begin-line-cookie nil)
 
-
 (defun xtra/set-the-default-face-attributes ()
   "This maybe works?"
   (interactive)
   (print org-present-extra-default)
-  (face-remap-add-relative 'default org-present-extra-default)
-  ;; this fucking works: (set-face-attribute 'default nil :height 241))
-  )
-
+  (face-remap-add-relative 'default org-present-extra-default))
 
 (defun xtra/remap-org-faces ()
   "Remap org mode faces from customised values."
   (setq
    xtra-org-default-cookie
    (face-remap-add-relative 'default org-present-extra-default)
-   )
-   ;; xtra-header-cookie
-   ;; (face-remap-add-relative 'header-line org-present-extra-header)
-   ;; xtra-org-document-title-cookie
-   ;; (face-remap-add-relative 'org-document-title org-present-extra-document-title)
-   ;; )
-  )
+
+   xtra-header-cookie
+   (face-remap-add-relative 'header-line org-present-extra-header)
+
+   xtra-org-document-title-cookie
+   (face-remap-add-relative 'org-document-title org-present-extra-document-title)
+
+   xtra-org-code-cookie
+   (face-remap-add-relative 'org-code org-present-extra-code)
+
+   xtra-org-verbatim-cookie
+   (face-remap-add-relative 'org-verbatim org-present-extra-verbatim)
+
+   xtra-org-block-cookie
+   (face-remap-add-relative 'org-block org-present-extra-block)
+
+   xtra-org-block-begin-line-cookie
+   (face-remap-add-relative 'org-block-begin-line org-present-extra-block)))
 
 (defun xtra/reset-org-faces ()
   "Reset org mode faces."
   (face-remap-remove-relative xtra-org-default-cookie)
-  ;;(face-remap-remove-relative xtra-header-cookie)
-  ;;(face-remap-remove-relative xtra-org-document-title-cookie)
-  )
-
-;   '((default (:height 1.5) default)
-;     (header-line (:height 5.0) header-line)
-;     (org-document-title (:height 5.0) org-document-title)
-;     (org-code (:height 1.5) org-code)
-;     (org-verbatim (:height 1.5) org-verbatim)
-;     (org-block (:height 1.25) org-block)
-;     (org-block-begin-line (:height 0.5) org-block-begin-line))))
-
+  (face-remap-remove-relative xtra-header-cookie)
+  (face-remap-remove-relative xtra-org-document-title-cookie)
+  (face-remap-remove-relative xtra-org-code-cookie)
+  (face-remap-remove-relative xtra-org-verbatim-cookie)
+  (face-remap-remove-relative xtra-org-block-cookie)
+  (face-remap-remove-relative xtra-org-block-begin-line-cookie))
 
 (provide 'org-present-extra)
 ;;; org-present-extra.el ends here
