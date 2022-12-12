@@ -60,15 +60,29 @@
   (org-mode-restart))
 
 ;;;###autoload
-(defun org-present-hide-emphasis-markers (arg)
+(defun org-present-prettify ()
   "Hide or show the stuff depending on ARG."
   (interactive "P")
   ;; without a prefix hide the things
-  (set-variable 'org-hide-emphasis-markers
-                (if (null arg) t nil))
-   ;; yes really!
+  (set-variable 'org-hide-emphasis-markers t)
+  (set-variable 'org-startup-indented t)
+  (set-variable 'org-pretty-entities t)
+  (set-variable 'org-startup-with-latex-preview t)
+  (set-variable 'org-startup-with-inline-images t)
   (org-mode-restart))
-  
+
+;;;###autoload
+(defun org-present-normalize ()
+  "Hide or show the stuff depending on ARG."
+  (interactive "P")
+  ;; without a prefix hide the things
+  (set-variable 'org-hide-emphasis-markers nil)
+  (set-variable 'org-startup-indented nil)
+  (set-variable 'org-pretty-entities nil)
+  (set-variable 'org-startup-with-latex-preview nil)
+  (set-variable 'org-startup-with-inline-images nil)
+  (org-mode-restart))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun xtra/hide-org-block-markers ()
