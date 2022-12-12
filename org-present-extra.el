@@ -62,7 +62,7 @@
 ;;;###autoload
 (defun org-present-prettify ()
   "Hide or show the stuff depending on ARG."
-  (interactive "P")
+  (interactive)
   ;; without a prefix hide the things
   (set-variable 'org-hide-emphasis-markers t)
   (set-variable 'org-startup-indented t)
@@ -74,7 +74,7 @@
 ;;;###autoload
 (defun org-present-normalize ()
   "Hide or show the stuff depending on ARG."
-  (interactive "P")
+  (interactive)
   ;; without a prefix hide the things
   (set-variable 'org-hide-emphasis-markers nil)
   (set-variable 'org-startup-indented nil)
