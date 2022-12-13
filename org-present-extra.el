@@ -42,6 +42,22 @@
   "Block begin line face remapping."
   :group 'org-present-extra)
 
+(defcustom org-present-extra-level-1
+  '(:height 1.7)
+  "Org-level-1 face remapping."
+  :group 'org-present-extra)
+
+(defcustom org-present-extra-level-2
+  '(:height 1.5)
+  "Org-level-2 face remapping."
+  :group 'org-present-extra)
+
+(defcustom org-present-extra-level-3
+  '(:height 1.25)
+  "Org-level-3 face remapping."
+  :group 'org-present-extra)
+
+
 ;;;###autoload
 (defun org-present-extra-start ()
   "Enter org presentation mode."
@@ -112,6 +128,9 @@
 (defvar-local xtra-org-verbatim-cookie nil)
 (defvar-local xtra-org-block-cookie nil)
 (defvar-local xtra-org-block-begin-line-cookie nil)
+(defvar-local xtra-org-level-1-cookie nil)
+(defvar-local xtra-org-level-2-cookie nil)
+(defvar-local xtra-org-level-3-cookie nil)
 
 (defun xtra/set-the-default-face-attributes ()
   "This maybe works?"
@@ -140,8 +159,19 @@
    xtra-org-block-cookie
    (face-remap-add-relative 'org-block org-present-extra-block)
 
+   xtra-org-level-1-cookie
+   (face-remap-add-relative 'org-level-1 org-present-extra-level-1)
+
+   xtra-org-level-2-cookie
+   (face-remap-add-relative 'org-level-2 org-present-extra-level-2)
+
+   xtra-org-level-3-cookie
+   (face-remap-add-relative 'org-level-3 org-present-extra-level-3)
+
    xtra-org-block-begin-line-cookie
    (face-remap-add-relative 'org-block-begin-line org-present-extra-block)))
+
+
 
 (defun xtra/reset-org-faces ()
   "Reset org mode faces."
@@ -151,6 +181,11 @@
   (face-remap-remove-relative xtra-org-code-cookie)
   (face-remap-remove-relative xtra-org-verbatim-cookie)
   (face-remap-remove-relative xtra-org-block-cookie)
+
+  (face-remap-remove-relative xtra-org-level-1-cookie)
+  (face-remap-remove-relative xtra-org-level-2-cookie)
+  (face-remap-remove-relative xtra-org-level-3-cookie)
+  
   (face-remap-remove-relative xtra-org-block-begin-line-cookie))
 
 (provide 'org-present-extra)
