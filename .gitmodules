@@ -4,3 +4,6 @@
 [submodule "org-tree-slide"]
 	path = org-tree-slide
 	url = git@github.com:sebeaumont/org-tree-slide.git
+[submodule "org-agda-mode"]
+	path = org-agda-mode
+	url = ./org-agda-mode
