@@ -62,19 +62,17 @@
 (defun org-present-extra-start ()
   "Enter org presentation mode."
   (interactive)
-  (org-present-prettify)
   (xtra/hide-org-block-markers)
-  (xtra/remap-org-faces))
+  (xtra/remap-org-faces)
+  (org-present-prettify))
 
 ;;;###autoload
 (defun org-present-extra-end ()
   "Leave org presentation mode."
   (interactive)
-  (org-present-normalize)
   (xtra/show-org-block-markers)
   (xtra/reset-org-faces)
-  ;;(org-mode-restart) TODO make this without this
-  )
+  (org-present-normalize))
 
 ;;;###autoload
 (defun org-present-prettify ()
@@ -85,7 +83,8 @@
               org-pretty-entities t
               org-hide-leading-stars t
               org-startup-with-latex-preview t
-              org-startup-with-inline-images t))
+              org-startup-with-inline-images t)
+  (font-lock-update))
 
 ;;;###autoload
 (defun org-present-normalize ()
@@ -96,7 +95,8 @@
               org-pretty-entities nil
               org-hide-leading-stars nil
               org-startup-with-latex-preview nil
-              org-startup-with-inline-images nil))
+              org-startup-with-inline-images nil)
+  (font-lock-update))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
