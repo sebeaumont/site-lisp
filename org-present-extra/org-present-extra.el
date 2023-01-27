@@ -62,7 +62,7 @@
 (defun org-present-extra-start ()
   "Enter org presentation mode."
   (interactive)
-  (set-variable 'org-hide-emphasis-markers t)
+  (org-present-prettify)
   (xtra/hide-org-block-markers)
   (xtra/remap-org-faces))
 
@@ -70,36 +70,33 @@
 (defun org-present-extra-end ()
   "Leave org presentation mode."
   (interactive)
-  (set-variable 'org-hide-emphasis-markers nil)
+  (org-present-normalize)
   (xtra/show-org-block-markers)
   (xtra/reset-org-faces)
-  (org-mode-restart))
+  ;;(org-mode-restart) TODO make this without this
+  )
 
 ;;;###autoload
 (defun org-present-prettify ()
   "Hide or show the stuff depending on ARG."
   (interactive)
-  ;; without a prefix hide the things
-  (set-variable 'org-hide-emphasis-markers t)
-  (set-variable 'org-startup-indented t)
-  (set-variable 'org-pretty-entities t)
-  (set-variable 'org-hide-leading-stars t)
-  (set-variable 'org-startup-with-latex-preview t)
-  (set-variable 'org-startup-with-inline-images t)
-  (org-mode-restart))
+  (setq-local org-hide-emphasis-markers t
+              ;;org-startup-indented t
+              org-pretty-entities t
+              org-hide-leading-stars t
+              org-startup-with-latex-preview t
+              org-startup-with-inline-images t))
 
 ;;;###autoload
 (defun org-present-normalize ()
   "Hide or show the stuff depending on ARG."
   (interactive)
-  ;; without a prefix hide the things
-  (set-variable 'org-hide-emphasis-markers nil)
-  (set-variable 'org-startup-indented nil)
-  (set-variable 'org-pretty-entities nil)
-  (set-variable 'org-hide-leading-stars nil)
-  (set-variable 'org-startup-with-latex-preview nil)
-  (set-variable 'org-startup-with-inline-images nil)
-  (org-mode-restart))
+  (setq-local org-hide-emphasis-markers nil
+              ;;org-startup-indented nil
+              org-pretty-entities nil
+              org-hide-leading-stars nil
+              org-startup-with-latex-preview nil
+              org-startup-with-inline-images nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -134,11 +131,6 @@
 (defvar-local xtra-org-level-2-cookie nil)
 (defvar-local xtra-org-level-3-cookie nil)
 
-(defun xtra/set-the-default-face-attributes ()
-  "This maybe works?"
-  (interactive)
-  (print org-present-extra-default)
-  (face-remap-add-relative 'default org-present-extra-default))
 
 (defun xtra/remap-org-faces ()
   "Remap org mode faces from customised values."
