@@ -79,7 +79,7 @@
   "Hide or show the stuff depending on ARG."
   (interactive)
   (setq-local org-hide-emphasis-markers t
-              ;;org-startup-indented t
+              org-startup-indented t
               org-pretty-entities t
               org-hide-leading-stars t
               org-startup-with-latex-preview t
@@ -91,7 +91,7 @@
   "Hide or show the stuff depending on ARG."
   (interactive)
   (setq-local org-hide-emphasis-markers nil
-              ;;org-startup-indented nil
+              org-startup-indented nil
               org-pretty-entities nil
               org-hide-leading-stars nil
               org-startup-with-latex-preview nil
