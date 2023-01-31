@@ -1,6 +1,6 @@
 ;;; org-present-extra --- Some extras to make org mode nicer to look at
 ;;; Commentary:
-;;;  Lots of font and variable hacking that can be toggled
+;;;  Lots of face hacking that can be toggled
 
 ;;; Code:
 
@@ -79,7 +79,6 @@
   "Hide or show the stuff depending on ARG."
   (interactive)
   (setq-local org-hide-emphasis-markers t
-              org-startup-indented t
               org-pretty-entities t
               org-hide-leading-stars t
               org-startup-with-latex-preview t
@@ -91,7 +90,6 @@
   "Hide or show the stuff depending on ARG."
   (interactive)
   (setq-local org-hide-emphasis-markers nil
-              org-startup-indented nil
               org-pretty-entities nil
               org-hide-leading-stars nil
               org-startup-with-latex-preview nil
