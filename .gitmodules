@@ -7,3 +7,6 @@
 [submodule "org-agda-mode"]
 	path = org-agda-mode
 	url = git@github.com:sebeaumont/org-agda-mode.git
+[submodule "epie"]
+	path = epie
+	url = https://codeberg.org/jao/epie.git
