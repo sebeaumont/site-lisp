@@ -9,4 +9,4 @@
 	url = git@github.com:sebeaumont/org-agda-mode.git
 [submodule "epie"]
 	path = epie
-	url =  git@github.com:sebeaumont/epie.git
+	url = git@github.com:sebeaumont/epie.git
