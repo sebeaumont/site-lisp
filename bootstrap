@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+while read module url s branch
+do
+    if [[ ! -d $module ]]; then
+        git clone --branch $branch $url $module;
+    else
+        echo "$module already exists!";
+    fi           
+done < MODULES
+   
