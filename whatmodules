@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+dirs=$(find . ! -name .git -type d -depth 1)
+
+for dir in $dirs; do
+    echo -ne "${dir}\t";
+    url=$(git -C $dir remote get-url origin)
+    if [[ ! -z $url ]]; then
+        #echo $dir $url;
+        echo -ne "$url\t";
+        git -C $dir branch | awk '/\*/'
+    fi;
+done;       
+   
