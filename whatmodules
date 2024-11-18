@@ -2,7 +2,8 @@
 dirs=$(find . ! -name .git -type d -depth 1)
 
 for dir in $dirs; do
-    echo -ne "${dir}\t";
+    module=$(echo $dir | sed -e 's/\.\///');
+    echo -ne "${module}\t";
     url=$(git -C $dir remote get-url origin)
     if [[ ! -z $url ]]; then
         #echo $dir $url;
